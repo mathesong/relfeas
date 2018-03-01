@@ -1,0 +1,24 @@
+Package: relfeas
+Version: 0.0.0.9000
+Title: Reliability for Feasibility Analysis
+Description: This package contains functions for examining the reliability of outcome measures for use in assessment of the feasibility of planned studies. It contains functions by which to calculate the extrapolated reliability, to calculate signal attenuation, to plot effect sizes to to visually judge their size, as well as convenience functions to convert quantities.
+Authors@R: person("Granville", "Matheson", email = "mathesong@gmail.com", role = c("aut", "cre"))
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+ByteCompile: true
+Imports: 
+    pwr,
+    ggplot2,
+    glue,
+    stringr,
+    stats,
+    tidyr,
+    agRee,
+    rlang,
+    psych,
+    dplyr
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 6.0.1
+Suggests: 
+    testthat
