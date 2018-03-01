@@ -1,16 +1,28 @@
+---
+output: github_document
+---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-relfeas
-=======
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+# relfeas
 
 The goal of relfeas is to allow researchers to use reliability reported in test-retest studies to make assessments of the feasibility of new study designs
 
-Installation
-------------
+
+## Installation
 
 You can install relfeas from github with:
 
-``` r
+```{r gh-installation, eval = FALSE}
 # install.packages("devtools")
 devtools::install_github("mathesong/relfeas")
 ```
+
