@@ -303,7 +303,7 @@ n2r_powersummary <- function(n, sig.level=0.05, alternative="two.sided") {
   return(out)
 }
 
-#' Attenuation factor for correlation coefficients based on Nunnally's equation
+#' Attenuation factor for correlation coefficients based on Spearman's equation
 #'
 #' @param ... A vector of reliability scores of the measures included
 #'
@@ -311,14 +311,14 @@ n2r_powersummary <- function(n, sig.level=0.05, alternative="two.sided") {
 #' @export
 #'
 #' @examples
-#' r_nunnally(0.8, 0.7, 0.7)
+#' r_attenuation(0.8, 0.7, 0.7)
 #'
-r_nunnally <- function(...) {
+r_attenuation <- function(...) {
   r_obs <- sqrt(prod(...))
   return(r_obs)
 }
 
-#' Calculate the maximum Cohen's D based on Nunnally's equation
+#' Calculate the maximum Cohen's D based on Spearman's equation
 #'
 #' @param ... A vector of reliability scores of the measures included
 #'
@@ -326,14 +326,14 @@ r_nunnally <- function(...) {
 #' @export
 #'
 #' @examples
-#' dmax_nunnally(0.8, 0.7)
-dmax_nunnally <- function(...) {
-  r_obs <- r_nunnally(...)
+#' dmax_attenuation(0.8, 0.7)
+dmax_attenuation <- function(...) {
+  r_obs <- r_attenuation(...)
   d_obs <- 2 * r_obs / sqrt(1 - r_obs ^ 2)
   return(d_obs)
 }
 
-#' Calculate the Cohen's D after attenuation based on Nunnally's equation
+#' Calculate the Cohen's D after attenuation based on Spearman's equation
 #'
 #' Enter in only one effect size measure
 #'
@@ -350,10 +350,10 @@ dmax_nunnally <- function(...) {
 #' @export
 #'
 #' @examples
-#' d_nunnally(rel_total = 0.7, u3=0.9)
-#' d_nunnally(rel_onegroup = 0.7, u3=0.9)
+#' d_attenuation(rel_total = 0.7, u3=0.9)
+#' d_attenuation(rel_onegroup = 0.7, u3=0.9)
 
-d_nunnally <- function(rel_total = NULL, rel_onegroup = NULL, d=NULL, overlap=NULL, u3=NULL, cles=NULL, n1=10, n2=n1) {
+d_attenuation <- function(rel_total = NULL, rel_onegroup = NULL, d=NULL, overlap=NULL, u3=NULL, cles=NULL, n1=10, n2=n1) {
   if (sum(c(is.null(rel_total), is.null(rel_onegroup))) != 1) stop("Please specify either total or one group reliability")
 
   if (sum(c(is.null(overlap), is.null(u3), is.null(d), is.null(cles))) != 3) stop("Please specify only one effect size measure")
@@ -375,7 +375,7 @@ d_nunnally <- function(rel_total = NULL, rel_onegroup = NULL, d=NULL, overlap=NU
   a <- (n1 + n2) ^ 2 / (n1 * n2) # Correction factor: https://www.meta-analysis.com/downloads/Meta-analysis%20Converting%20among%20effect%20sizes.pdf
   r_true <- d_true / sqrt(d_true ^ 2 + a)
 
-  r_obs <- r_true * r_nunnally(rel_total)
+  r_obs <- r_true * r_attenuation(rel_total)
 
   d_obs <- 2 * r_obs / sqrt(1 - r_obs ^ 2)
   return(d_obs)
