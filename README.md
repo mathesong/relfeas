@@ -3,9 +3,9 @@
 relfeas
 =======
 
-The goal of relfeas is to allow researchers to use reliability reported in test-retest studies to make assessments of the feasibility of new study designs. This study accompanies the preprint: We need to talk about reliability: Making better use of test-retest studies for study design and interpretation.
+The goal of relfeas is to allow researchers to use reliability reported in test-retest studies to make assessments of the feasibility of new study designs. This R package accompanies the preprint: [We need to talk about reliability: Making better use of test-retest studies for study design and interpretation](https://www.biorxiv.org/content/early/2018/03/06/274894).
 
-The package is still a bit rough around the edges on some functions. It should be considered a work in progress.
+**Note:** The package is still a bit rough around the edges on some functions. If you find anything wrong, ugly, or that I've not included something obviously useful which would follow from anything presented, please don't be shy about letting me know in the Issues or by mail at mathesong\[at\]gmail.com
 
 Installation
 ------------
@@ -84,19 +84,7 @@ pwr::pwr.r.test(r=sqrt(0.3)*r_attenuation(0.8, 0.7), power=0.8)
 Characteristics of the sample:
 
 ``` r
-# Sample characteristicscular Cohen's D represents (e.g. as a Common Language Effect Size)
-es_convert(d = 1)
-#> $d
-#> [1] 1
-#> 
-#> $u3
-#> [1] 0.8413447
-#> 
-#> $overlap
-#> [1] 0.6170751
-#> 
-#> $cles
-#> [1] 0.7602499
+# Sample characteristics
 
 meanbp <- 1.91
 delta_mean <- -0.12 # Mean percentage change in difference study
@@ -170,7 +158,7 @@ Note: there is a small error in the paper on this last calculation (whose source
 
 #### Example 4
 
-**Summary:** A measurement outcome with high reliability but also high variance (e.g. PBR28 for translocator protein, TSPO) is less well suited for assessing small proportional changes within individuals than a measurement outcome with low variance, even if it has relatively low reliability (e.g. AZ10419369 for frontal cortex 5-HT<sub>1B</sub> receptors). However, larger proportional within-individual changes are more likely in the former due to the larger variance.
+**Summary:** A measurement outcome with high reliability but also high variance (e.g. PBR28 for translocator protein, TSPO) is less well suited for assessing small proportional changes within individuals than a measurement outcome with low variance, even if it has relatively low reliability (e.g. AZ10419369 for frontal cortex serotonin 1B receptors). However, larger proportional within-individual changes are more likely in the former due to the larger variance.
 
 ``` r
 tspo_hab_10es <- 10/42
@@ -185,7 +173,16 @@ ser1b_10es <- 10/6
 
 #### Example 5
 
-Variance reduction strategies (see paper) for PBR28 lead to new outcomes with poor reliability (see paper and [Matheson et al., 2017](https://ejnmmires.springeropen.com/articles/10.1186/s13550-017-0304-1)). Very large differences between groups are required before these new outcome measures begin to be reliable for applied research questions. One can conceptualise the required Cohen's D in various ways to get an idea of whether or not such a large effect is or is not reasonable for a particular research question.
+Variance reduction strategies (see paper) for PBR28 lead to new outcomes with poor reliability (see paper by [Matheson et al., 2017](https://ejnmmires.springeropen.com/articles/10.1186/s13550-017-0304-1)). Very large differences between groups are required before these new outcome measures begin to be reliable for applied research questions.
+
+One can conceptualise the required Cohen's D in various ways to get an idea of whether or not such a large effect is or is not reasonable for a particular research question. ()
+
+-   **d** Cohen's D
+-   **u3** Cohen's U3
+-   **overlap** Distributional overlap
+-   **cles** Common Language Effect Size
+
+(more details in the paper, or [here](http://rpsychologist.com/d3/cohend/))
 
 ``` r
 #########
@@ -195,27 +192,20 @@ Variance reduction strategies (see paper) for PBR28 lead to new outcomes with po
 (sd_basic <- extrapRel2sd(0.7, 0.5))
 #> [1] 1.290994
 
-(d_basic <- sdtot2mean2(sd_total = sd_basic, n1 = 20, n2=20, mean1 = 1))
-#> $mean2pos
-#> [1] 2.643168
-#> 
-#> $mean2neg
-#> [1] -0.6431677
-#> 
-#> $meantotpos
-#> [1] 1.821584
-#> 
-#> $meantotneg
-#> [1] 0.1784162
-#> 
+d_basic <- sdtot2mean2(sd_total = sd_basic, n1 = 20, n2=20, mean1 = 1)
+
+(es_basic <- es_convert(d=d_basic$d))
 #> $d
 #> [1] 1.643168
 #> 
-#> $percdif
-#> [1] 164.3168
-
-(ol_basic <- d2overlap(d_basic$d))
+#> $u3
+#> [1] 0.9498259
+#> 
+#> $overlap
 #> [1] 0.4113138
+#> 
+#> $cles
+#> [1] 0.8773609
 
 
 ##############
@@ -225,27 +215,20 @@ Variance reduction strategies (see paper) for PBR28 lead to new outcomes with po
 (sd_acceptable <- extrapRel2sd(0.8, 0.5))
 #> [1] 1.581139
 
-(d_acceptable <- sdtot2mean2(sd_total = sd_acceptable, n1 = 20, n2=20, mean1 = 1))
-#> $mean2pos
-#> [1] 3.439262
-#> 
-#> $mean2neg
-#> [1] -1.439262
-#> 
-#> $meantotpos
-#> [1] 2.219631
-#> 
-#> $meantotneg
-#> [1] -0.2196311
-#> 
+d_acceptable <- sdtot2mean2(sd_total = sd_acceptable, n1 = 20, n2=20, mean1 = 1)
+
+(es_acceptable <- es_convert(d=d_acceptable$d))
 #> $d
 #> [1] 2.439262
 #> 
-#> $percdif
-#> [1] 243.9262
-
-(ol_acceptable <- d2overlap(d_acceptable$d))
+#> $u3
+#> [1] 0.9926414
+#> 
+#> $overlap
 #> [1] 0.2226048
+#> 
+#> $cles
+#> [1] 0.9577199
 
 
 ############
@@ -255,33 +238,25 @@ Variance reduction strategies (see paper) for PBR28 lead to new outcomes with po
 (sd_clin <- extrapRel2sd(0.9, 0.5))
 #> [1] 2.236068
 
-(d_clin <- sdtot2mean2(sd_total = sd_clin, n1 = 20, n2=20, mean1 = 1))
-#> $mean2pos
-#> [1] 4.962323
-#> 
-#> $mean2neg
-#> [1] -2.962323
-#> 
-#> $meantotpos
-#> [1] 2.981161
-#> 
-#> $meantotneg
-#> [1] -0.9811613
-#> 
+d_clin <- sdtot2mean2(sd_total = sd_clin, n1 = 20, n2=20, mean1 = 1)
+
+(es_clin <- es_convert(d=d_clin$d))
 #> $d
 #> [1] 3.962323
 #> 
-#> $percdif
-#> [1] 396.2323
-
-(ol_clin <- d2overlap(d_clin$d))
+#> $u3
+#> [1] 0.9999629
+#> 
+#> $overlap
 #> [1] 0.04757319
+#> 
+#> $cles
+#> [1] 0.997459
+```
 
+We can also plot these effects to get a better idea of how they would look
 
-########
-# Plot #
-########
-
+``` r
 graphtheme <- theme(axis.text.x=element_blank(),
                     axis.text.y=element_blank())
 
@@ -300,7 +275,7 @@ d_fig <- grid.arrange(
 
 <img src="man/figures/README-EffectSizes-1.png" width="100%" />
 
-Note that the figure above, as well as the function to generate these figures, is inspired by the work of Kristoffer Magnusson, a.k.a. [R Psychologist](https://twitter.com/krstoffr), and his [interactive Cohen's D figure](http://rpsychologist.com/d3/cohend/) as well as his description of where [Cohen was wrong about overlap](http://rpsychologist.com/cohen-d-proportion-overlap).
+Note that the figure above, as well as the function to generate these figures and these alternative explanation metrics describing effect sizes, are inspired by the work of Kristoffer Magnusson, a.k.a. [R Psychologist](https://twitter.com/krstoffr), and his [interactive Cohen's D figure](http://rpsychologist.com/d3/cohend/) as well as his description of where [Cohen was wrong about overlap](http://rpsychologist.com/cohen-d-proportion-overlap).
 
 ### Other Examples
 
