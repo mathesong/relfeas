@@ -184,15 +184,15 @@ trt_widify <- function(data, values, cases, rater = NULL) {
 
   # Renaming rater variable if present
   if (!is.null(rater)) {
-    data[, rater] <- paste0("r", as.numeric(as.factor(data[, rater])))
+    data[[rater]] <- paste0("r", as.numeric(as.factor(data[[rater]])))
   }
 
 
   # Making fixed up long frame
   longdat <- tibble::tibble(
-    values = data[, values],
-    cases = data[, cases],
-    rater = data[, rater]
+    values = data[[values]],
+    cases = data[[cases]],
+    rater = data[[rater]]
   )
 
   # Making wide
