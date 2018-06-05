@@ -154,8 +154,6 @@ ss_total <- sumStat_total(n1 = 20, mean1 =  abs(delta_mean*meanbp), sd1 = delta_
 #> [1] 2.281319
 ```
 
-Note: there is a small error in the paper on this last calculation (whose source I have now fixed) which underestimated the effect. This will be updated.
-
 #### Example 4
 
 **Summary:** A measurement outcome with high reliability but also high variance (e.g. PBR28 for translocator protein, TSPO) is less well suited for assessing small proportional changes within individuals than a measurement outcome with low variance, even if it has relatively low reliability (e.g. AZ10419369 for frontal cortex serotonin 1B receptors). However, larger proportional within-individual changes are more likely in the former due to the larger variance.
