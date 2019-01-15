@@ -48,10 +48,10 @@ test_that("u32d works", {
   expect_equal(u32d(0.5), 0)
 })
 
-test_that("es_convert_d u3 works", {
-  expect_equal(es_convert(u3 = 0.5)$d, 0)
+test_that("cohend_convert_d u3 works", {
+  expect_equal(cohend_convert(u3 = 0.5)$d, 0)
 })
 
-test_that("es_convert_d d works", {
-  expect_equal(es_convert(d = 0)$cles, 0.5)
+test_that("cohend_convert_d d works", {
+  expect_equal(cohend_convert(d = 0)$cles, 0.5)
 })

@@ -358,7 +358,7 @@ d_attenuation <- function(rel_total = NULL, rel_onegroup = NULL, d=NULL, overlap
 
   if (sum(c(is.null(overlap), is.null(u3), is.null(d), is.null(cles))) != 3) stop("Please specify only one effect size measure")
 
-  effect_sizes <- es_convert(d, overlap, u3, cles)
+  effect_sizes <- cohend_convert(d, overlap, u3, cles)
 
   if (is.null(rel_total)) {
     if (length(rel_onegroup) > 1) rel_onegroup <- prod(rel_onegroup)

@@ -5,7 +5,8 @@
 \title{Plot the difference between two distributions}
 \usage{
 plot_difference(d = NULL, overlap = NULL, u3 = NULL, cles = NULL,
-  colours = c("#85d4e3", "#e39f85"))
+  colours = c("#85d4e3", "#e39f85"), digits_d = 2, digits_ol = 0,
+  digits_u3 = 0, digits_cles = 0)
 }
 \arguments{
 \item{d}{Cohen's D. Optional: pick only one effect size}

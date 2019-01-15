@@ -18,10 +18,12 @@
 #' @examples
 #' plot_difference(d=2)
 #'
-plot_difference <- function(d=NULL, overlap=NULL, u3=NULL, cles=NULL, colours=c("#85d4e3", "#e39f85")) {
+plot_difference <- function(d=NULL, overlap=NULL, u3=NULL, cles=NULL, colours=c("#85d4e3", "#e39f85"),
+                            digits_d=2, digits_ol=0, digits_u3=0, digits_cles=0) {
+
   if (sum(c(is.null(overlap), is.null(u3), is.null(d), is.null(cles))) != 3) stop("Please specify only one effect size measure")
 
-  effect_sizes <- es_convert(d, overlap, u3, cles)
+  effect_sizes <- cohend_convert(d, overlap, u3, cles)
 
   d <- effect_sizes$d
   overlap <- effect_sizes$overlap
@@ -50,8 +52,10 @@ plot_difference <- function(d=NULL, overlap=NULL, u3=NULL, cles=NULL, colours=c(
     labs(
       title = "Overlap between Groups",
       x = "Outcome Value", y = "Density",
-      subtitle = glue::glue("Cohen's D = {round(d,2)}, Overlap = {round(overlap*100)}%,
-                             Cohen's U3 = {round(u3*100)}%, CLES = {round(cles*100)}%")
+      subtitle = glue::glue("Cohen's D = {round(d,digits_d)},",
+                            "Overlap = {round(overlap*100, digits_ol)}%,",
+                            "Cohen's U3 = {round(u3*100, digits_u3)}%,",
+                            "CLES = {round(cles*100, digits_cles)}%")
     ) +
     theme_bw() +
     scale_x_discrete(breaks = NULL)

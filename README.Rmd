@@ -174,7 +174,7 @@ to get an idea of whether or not such a large effect is or is not reasonable for
 
 d_basic <- sdtot2mean2(sd_total = sd_basic, n1 = 20, n2=20, mean1 = 1)
 
-(es_basic <- es_convert(d=d_basic$d))
+(es_basic <- cohend_convert(d=d_basic$d))
 
 
 ##############
@@ -185,7 +185,7 @@ d_basic <- sdtot2mean2(sd_total = sd_basic, n1 = 20, n2=20, mean1 = 1)
 
 d_acceptable <- sdtot2mean2(sd_total = sd_acceptable, n1 = 20, n2=20, mean1 = 1)
 
-(es_acceptable <- es_convert(d=d_acceptable$d))
+(es_acceptable <- cohend_convert(d=d_acceptable$d))
 
 
 ############
@@ -196,7 +196,7 @@ d_acceptable <- sdtot2mean2(sd_total = sd_acceptable, n1 = 20, n2=20, mean1 = 1)
 
 d_clin <- sdtot2mean2(sd_total = sd_clin, n1 = 20, n2=20, mean1 = 1)
 
-(es_clin <- es_convert(d=d_clin$d))
+(es_clin <- cohend_convert(d=d_clin$d))
 
 ```
 
@@ -238,13 +238,13 @@ It is extremely important to consider effect sizes when performing study design.
 ## If one wishes to know the true size of what a particular Cohen's D 
 ## represents (e.g. as a Common Language Effect Size)
 
-es_convert(d = 1)
+cohend_convert(d = 1)
 
 ## If one wishes to know what the corresponding Cohen's D would be for
 ## an application for which the effect size can be more intuitively understood
 ## as a Common Language Effect Size for example
 
-es_convert(cles = 0.8)
+cohend_convert(cles = 0.8)
 ```
 
 #### Performing test-retest analysis

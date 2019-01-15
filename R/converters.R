@@ -227,10 +227,10 @@ u32d <- function(u3) {
 #' @references http://rpsychologist.com/d3/cohend/
 #'
 #' @examples
-#' es_convert(d=0.8)
-#' es_convert(u3=0.5)
+#' cohend_convert(d=0.8)
+#' cohend_convert(u3=0.5)
 #'
-es_convert <- function(d=NULL, overlap=NULL, u3=NULL, cles=NULL) {
+cohend_convert <- function(d=NULL, overlap=NULL, u3=NULL, cles=NULL) {
   if (sum(c(is.null(overlap), is.null(u3), is.null(d), is.null(cles))) != 3) {
     stop("Please specify only one effect size measure")
   }

@@ -14,7 +14,7 @@
 #'   or that it the order doesn't matter.
 #'
 #' @return List containing all the data, including a tibble called tidy, with
-#'   the summary in a single row. icc is the ICC1, and icc_l and icc_u are the
+#'   the summary in a single row. icc is the ICC(A,1), and icc_l and icc_u are the
 #'   upper and lower bounds of the 95% confidence interval for the icc. wcsv
 #'   is the within-subject coefficient of variation, sdd is the smallest
 #'   detectable difference (sddm is normalised to the mean), absvar is the
@@ -49,11 +49,13 @@ trt <- function(data, values, cases, rater = NULL) {
   # Test-Retest - ICC-based
   icc_detailed <- psych::ICC(widemat)
 
-  icc1 <- agRee::agree.icc1(widemat) # Error variance scaled to total variance
+  icca1 <- list(value = psych::ICC(widemat)$results$ICC[2],
+                lbound = psych::ICC(widemat)$results$`lower bound`[2],
+                ubound = psych::ICC(widemat)$results$`upper bound`[2])  # ICC(A,1)
   wscv <- agRee::agree.wscv(widemat) # Error se scaled to mean
 
   sigma_e <- purrr::map(wscv, ~ . * sumstats_total$mean) # Error se estimated directly
-  sem <- sumstats_total$sd * sqrt(1 - icc1$value) # Error se estimated indirectly
+  sem <- sumstats_total$sd * sqrt(1 - icca1$value) # Error se estimated indirectly
 
   sdd <- agRee::agree.sdd(widemat)
   sddm <- agRee::agree.sddm(widemat)
@@ -93,9 +95,9 @@ trt <- function(data, values, cases, rater = NULL) {
     kurtosis = tail(sumstats$kurtosis, 1),
 
     # Test-Retest
-    icc = icc1$value,
-    icc_l = icc1$lbound,
-    icc_u = icc1$ubound,
+    icc = icca1$value,
+    icc_l = icca1$lbound,
+    icc_u = icca1$ubound,
 
     wscv = wscv$value,
     sdd = sdd$value,
@@ -110,7 +112,7 @@ trt <- function(data, values, cases, rater = NULL) {
     tidy = tidyout,
     sumstats = sumstats,
     icc_detailed = icc_detailed,
-    icc = icc1,
+    icc = icca1,
     wscv = wscv,
     sigma_e = sigma_e,
     sdd = sdd,
