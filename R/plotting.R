@@ -53,7 +53,7 @@ plot_difference <- function(d=NULL, overlap=NULL, u3=NULL, cles=NULL, colours=c(
       title = "Overlap between Groups",
       x = "Outcome Value", y = "Density",
       subtitle = glue::glue("Cohen's D = {round(d,digits_d)}, ",
-                            "Overlap = {round(overlap*100, digits_ol)}%\n,",
+                            "Overlap = {round(overlap*100, digits_ol)}%,\n",
                             "Cohen's U3 = {round(u3*100, digits_u3)}%, ",
                             "CLES = {round(cles*100, digits_cles)}%")
     ) +
