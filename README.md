@@ -44,7 +44,7 @@ Even if the measurement error were to double due to the use of partial volume ef
 
 ``` r
 sd2extrapRel(sd = 0.32,icc_original =  0.32,
-              sd_original =  0.10, rho = 2)
+              sd_original =  0.10, tau = 2)
 #> [1] 0.734375
 ```
 
@@ -192,7 +192,7 @@ One can conceptualise the required Cohen's D in various ways to get an idea of w
 
 d_basic <- sdtot2mean2(sd_total = sd_basic, n1 = 20, n2=20, mean1 = 1)
 
-(es_basic <- es_convert(d=d_basic$d))
+(es_basic <- cohend_convert(d=d_basic$d))
 #> $d
 #> [1] 1.643168
 #> 
@@ -215,7 +215,7 @@ d_basic <- sdtot2mean2(sd_total = sd_basic, n1 = 20, n2=20, mean1 = 1)
 
 d_acceptable <- sdtot2mean2(sd_total = sd_acceptable, n1 = 20, n2=20, mean1 = 1)
 
-(es_acceptable <- es_convert(d=d_acceptable$d))
+(es_acceptable <- cohend_convert(d=d_acceptable$d))
 #> $d
 #> [1] 2.439262
 #> 
@@ -238,7 +238,7 @@ d_acceptable <- sdtot2mean2(sd_total = sd_acceptable, n1 = 20, n2=20, mean1 = 1)
 
 d_clin <- sdtot2mean2(sd_total = sd_clin, n1 = 20, n2=20, mean1 = 1)
 
-(es_clin <- es_convert(d=d_clin$d))
+(es_clin <- cohend_convert(d=d_clin$d))
 #> $d
 #> [1] 3.962323
 #> 
@@ -287,7 +287,7 @@ It is extremely important to consider effect sizes when performing study design.
 ## If one wishes to know the true size of what a particular Cohen's D 
 ## represents (e.g. as a Common Language Effect Size)
 
-es_convert(d = 1)
+cohend_convert(d = 1)
 #> $d
 #> [1] 1
 #> 
@@ -304,7 +304,7 @@ es_convert(d = 1)
 ## an application for which the effect size can be more intuitively understood
 ## as a Common Language Effect Size for example
 
-es_convert(cles = 0.8)
+cohend_convert(cles = 0.8)
 #> $d
 #> [1] 1.190232
 #> 
@@ -375,8 +375,8 @@ kable(trt_out, digits = 2)
 | Region     |   mean|    sd|   cov|  skew|  kurtosis|   icc|  icc\_l|  icc\_u|  wscv|   sdd|  absvar|  signvar|  signvar\_sd|
 |:-----------|------:|-----:|-----:|-----:|---------:|-----:|-------:|-------:|-----:|-----:|-------:|--------:|------------:|
 | amygdala   |  27.53|  6.18|  0.22|  0.10|     -1.43|  0.95|    0.83|    0.99|  0.05|  3.98|    0.06|    -0.02|         0.08|
-| cerebellum |  12.26|  1.37|  0.11|  0.16|     -1.40|  0.83|    0.27|    0.97|  0.05|  1.65|    0.06|     0.03|         0.07|
-| brainStem  |   0.79|  0.27|  0.35|  0.24|     -1.41|  0.36|   -0.28|    0.79|  0.28|  0.61|    0.30|    -0.01|         0.40|
+| cerebellum |  12.26|  1.37|  0.11|  0.16|     -1.40|  0.83|    0.29|    0.97|  0.05|  1.65|    0.06|     0.03|         0.07|
+| brainStem  |   0.79|  0.27|  0.35|  0.24|     -1.41|  0.36|   -0.29|    0.79|  0.28|  0.61|    0.30|    -0.01|         0.40|
 
 The table lists the following for each sample:
 

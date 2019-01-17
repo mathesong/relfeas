@@ -4,7 +4,7 @@
 \alias{sd2extrapRel}
 \title{Extrapolate standard deviation to reliability}
 \usage{
-sd2extrapRel(sd, icc_original, sd_original = 1, rho = 1)
+sd2extrapRel(sd, icc_original, sd_original = 1, tau = 1)
 }
 \arguments{
 \item{sd}{Standard deviation in the new sample for which the reliability is being extrapolated.}
@@ -13,7 +13,7 @@ sd2extrapRel(sd, icc_original, sd_original = 1, rho = 1)
 
 \item{sd_original}{Standard deviation from the original study. Optional: default is 1. For 1, the sd argument is the proportional increase in SD.}
 
-\item{rho}{SEM inflation factor. Optional: default is 1. For 1, the SEM is assumed to be constant between studies.}
+\item{tau}{SEM inflation factor. Optional: default is 1. For 1, the SEM is assumed to be constant between studies.}
 }
 \value{
 The extrapolated ICC ICC value for the new sample

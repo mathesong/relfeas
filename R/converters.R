@@ -38,7 +38,7 @@ sem2icc <- function(sem, sd) {
 #' @param icc_extrap Extrapolated ICC value (i.e. desired reliability)
 #' @param icc_original Original ICC value
 #' @param sd_original Original SD value. Optional: default is 1. For 1, it will be the proportional increase in the SD.
-#' @param rho SEM inflation factor. Optional: default is 1. For 1, the SEM is assumed to be constant between studies.
+#' @param tau SEM inflation factor. Optional: default is 1. For 1, the SEM is assumed to be constant between studies.
 #'
 #' @return The standard deviation of a new sample for which the ICC would be equal to the desired value
 #' @export
@@ -46,7 +46,7 @@ sem2icc <- function(sem, sd) {
 #' @examples
 #' extrapRel2sd(icc_extrap=0.9, icc_original=0.5)
 #'
-extrapRel2sd <- function(icc_extrap, icc_original, sd_original=1, rho=1) {
+extrapRel2sd <- function(icc_extrap, icc_original, sd_original=1, tau=1) {
   if (icc_extrap > 1 | icc_extrap < -1) {
     stop("ICC values should be between -1 and 1")
   }
@@ -54,7 +54,7 @@ extrapRel2sd <- function(icc_extrap, icc_original, sd_original=1, rho=1) {
     stop("ICC values should be between -1 and 1")
   }
 
-  sem <- rho * icc2sem(icc_original, sd_original)
+  sem <- tau * icc2sem(icc_original, sd_original)
   sdout <- sem / sqrt(1 - icc_extrap)
   return(sdout)
 }
@@ -66,7 +66,7 @@ extrapRel2sd <- function(icc_extrap, icc_original, sd_original=1, rho=1) {
 #' @param sd Standard deviation in the new sample for which the reliability is being extrapolated.
 #' @param icc_original ICC from the original study.
 #' @param sd_original Standard deviation from the original study. Optional: default is 1. For 1, the sd argument is the proportional increase in SD.
-#' @param rho SEM inflation factor. Optional: default is 1. For 1, the SEM is assumed to be constant between studies.
+#' @param tau SEM inflation factor. Optional: default is 1. For 1, the SEM is assumed to be constant between studies.
 #'
 #' @return The extrapolated ICC ICC value for the new sample
 #' @export
@@ -74,12 +74,12 @@ extrapRel2sd <- function(icc_extrap, icc_original, sd_original=1, rho=1) {
 #' @examples
 #' sd2extrapRel(sd=2, icc_original=0.5)
 #'
-sd2extrapRel <- function(sd, icc_original, sd_original=1, rho=1) {
+sd2extrapRel <- function(sd, icc_original, sd_original=1, tau=1) {
   if (icc_original > 1 | icc_original < -1) {
     stop("ICC values should be between -1 and 1")
   }
 
-  sem <- rho * icc2sem(icc_original, sd_original)
+  sem <- tau * icc2sem(icc_original, sd_original)
   iccout <- 1 - sem ^ 2 / sd ^ 2
   return(iccout)
 }

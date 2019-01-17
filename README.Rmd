@@ -58,7 +58,7 @@ Even if the measurement error were to double due to the use of partial volume ef
 
 ```{r}
 sd2extrapRel(sd = 0.32,icc_original =  0.32,
-              sd_original =  0.10, rho = 2)
+              sd_original =  0.10, tau = 2)
 ```
 
 

@@ -4,7 +4,7 @@
 \alias{extrapRel2sd}
 \title{Extrapolate reliability to standard deviation}
 \usage{
-extrapRel2sd(icc_extrap, icc_original, sd_original = 1, rho = 1)
+extrapRel2sd(icc_extrap, icc_original, sd_original = 1, tau = 1)
 }
 \arguments{
 \item{icc_extrap}{Extrapolated ICC value (i.e. desired reliability)}
@@ -13,7 +13,7 @@ extrapRel2sd(icc_extrap, icc_original, sd_original = 1, rho = 1)
 
 \item{sd_original}{Original SD value. Optional: default is 1. For 1, it will be the proportional increase in the SD.}
 
-\item{rho}{SEM inflation factor. Optional: default is 1. For 1, the SEM is assumed to be constant between studies.}
+\item{tau}{SEM inflation factor. Optional: default is 1. For 1, the SEM is assumed to be constant between studies.}
 }
 \value{
 The standard deviation of a new sample for which the ICC would be equal to the desired value
