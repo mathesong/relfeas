@@ -26,10 +26,9 @@ plot_difference <- function(d=NULL, overlap=NULL, u3=NULL, cles=NULL, colours=c(
   effect_sizes <- cohend_convert(d, overlap, u3, cles)
 
   d <- effect_sizes$d
-  overlap <- effect_sizes$overlap
-  u3 <- effect_sizes$u3
-  cles <- effect_sizes$cles
-
+  overlap <- effect_sizes$overlap*100
+  u3 <- effect_sizes$u3*100
+  cles <- effect_sizes$cles*100
 
   ovplot <- ggplot(data.frame(x = c(-5, 5)), aes(x)) +
     stat_function(
@@ -53,12 +52,54 @@ plot_difference <- function(d=NULL, overlap=NULL, u3=NULL, cles=NULL, colours=c(
       title = "Overlap between Groups",
       x = "Outcome Value", y = "Density",
       subtitle = glue::glue("Cohen's D = {round(d,digits_d)}, ",
-                            "Overlap = {round(overlap*100, digits_ol)}%,\n",
-                            "Cohen's U3 = {round(u3*100, digits_u3)}%, ",
-                            "CLES = {round(cles*100, digits_cles)}%")
+                            "Overlap = {roundbound(overlap, digits_ol)}%,\n",
+                            "Cohen's U3 = {roundbound(u3, digits_u3)}%, ",
+                            "CLES = {roundbound(cles, digits_cles)}%")
     ) +
     theme_bw() +
     scale_x_discrete(breaks = NULL)
 
   return(ovplot)
 }
+
+
+#' Bounded rounding
+#'
+#' This function is for presenting a figure when it should not reach a certain
+#' bound, and instead shows it as greater than the number below.
+#'
+#' @param x a numeric value.
+#' @param digits integer indicating the number of decimal places
+#' @param maximum maximum bound. Defaults to 100.
+#' @param minimum minimum bound. Defaults to 0.
+#'
+#' @return A character string of the rounded value
+#' @export
+#'
+#' @examples
+#' roundbound(99.9)
+#' roundbound(99.3)
+#'
+#' roundbound(0.9)
+#' roundbound(0.3)
+#'
+roundbound <- function(x, digits=0, maximum=100, minimum=0) {
+
+  if( round(x, digits+1) > (maximum - 10^(-(digits))) ) {
+
+    x <- paste0(">",  maximum - 1*10^(-digits))
+
+  } else if( round(x, digits+1) < (minimum + 10^(-(digits))) ) {
+
+    x <- paste0("<",  minimum + 1*10^(-digits))
+
+  } else {
+
+    x <- as.character( round(x, digits) )
+
+  }
+
+  return(x)
+
+}
+
