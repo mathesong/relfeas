@@ -19,6 +19,6 @@ Imports:
     psych,
     dplyr
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.1
 Suggests: 
     testthat

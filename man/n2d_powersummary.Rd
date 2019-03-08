@@ -4,7 +4,8 @@
 \alias{n2d_powersummary}
 \title{Power analysis summary of Cohen's D values for a given sample size}
 \usage{
-n2d_powersummary(n1, n2 = n1, sig.level = 0.05, alternative = "two.sided")
+n2d_powersummary(n1, n2 = n1, sig.level = 0.05,
+  alternative = "two.sided")
 }
 \arguments{
 \item{n1}{Number of measurements in group 1.}
