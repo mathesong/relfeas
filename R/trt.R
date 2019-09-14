@@ -15,7 +15,7 @@
 #'
 #' @return List containing all the data, including a tibble called tidy, with
 #'   the summary in a single row. icc is the ICC(A,1), and icc_l and icc_u are the
-#'   upper and lower bounds of the 95% confidence interval for the icc. wcsv
+#'   upper and lower bounds of the 95\% confidence interval for the icc. wcsv
 #'   is the within-subject coefficient of variation, sdd is the smallest
 #'   detectable difference (sddm is normalised to the mean), absvar is the
 #'   average absolute variability. signvar is the signed variability (for
@@ -42,7 +42,7 @@ trt <- function(data, values, cases, rater = NULL) {
   sumstats_total <- tibble::as_tibble(psych::describe(c(widemat)))
 
   sumstats <- rbind(sumstats_rater, sumstats_total)
-  sumstats$cov <- sumstats$sd / sumstats$mean
+  sumstats$cv <- sumstats$sd / sumstats$mean
   sumstats$grouping <- c(colnames(widemat), "All")
 
 
@@ -88,7 +88,7 @@ trt <- function(data, values, cases, rater = NULL) {
     # Numerical
     mean = tail(sumstats$mean, 1),
     sd = tail(sumstats$sd, 1),
-    cov = tail(sumstats$cov, 1),
+    cv = tail(sumstats$cv, 1),
 
     # Distributional
     skew = tail(sumstats$skew, 1),

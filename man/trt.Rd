@@ -22,7 +22,7 @@ or that it the order doesn't matter.}
 \value{
 List containing all the data, including a tibble called tidy, with
 the summary in a single row. icc is the ICC(A,1), and icc_l and icc_u are the
-upper and lower bounds of the 95% confidence interval for the icc. wcsv
+upper and lower bounds of the 95\% confidence interval for the icc. wcsv
 is the within-subject coefficient of variation, sdd is the smallest
 detectable difference (sddm is normalised to the mean), absvar is the
 average absolute variability. signvar is the signed variability (for
