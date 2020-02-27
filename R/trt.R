@@ -20,8 +20,8 @@
 #'   detectable difference (sddm is normalised to the mean), absvar is the
 #'   average absolute variability. signvar is the signed variability (for
 #'   detecting bias between measurements) and signvar_sd is the sd of the
-#'   signed variability (for within-subjects power analyses), both normalised
-#'   to the grand mean. All percentage values are not multiplied by 100.
+#'   signed variability (for within-subjects power analyses), both as a fraction
+#'   of the grand mean. All percentage values are not multiplied by 100.
 #' @export
 #'
 #' @examples
@@ -74,9 +74,9 @@ trt <- function(data, values, cases, rater = NULL) {
   # Test-Retest - Var
   signvar_vals <- apply(widemat, 1, function(x) diff(x))
   if(ncol(widemat)<3) {
-    signvar_means <- signvar_vals  / absvar_means
+    signvar_means <- signvar_vals / mean(widemat) # As percent of grand mean
   } else {
-    signvar_means <- colMeans(signvar_vals)  / absvar_means
+    signvar_means <- colMeans(signvar_vals) / mean(widemat) # As percent of grand mean
   }
 
   signvar_mean <- mean( signvar_means )

@@ -27,8 +27,8 @@ is the within-subject coefficient of variation, sdd is the smallest
 detectable difference (sddm is normalised to the mean), absvar is the
 average absolute variability. signvar is the signed variability (for
 detecting bias between measurements) and signvar_sd is the sd of the
-signed variability (for within-subjects power analyses), both normalised
-to the grand mean. All percentage values are not multiplied by 100.
+signed variability (for within-subjects power analyses), both as a fraction
+of the grand mean. All percentage values are not multiplied by 100.
 }
 \description{
 This conducts a test-retest analysis of a data set in long (tidy) format.
